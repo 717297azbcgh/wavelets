@@ -1,0 +1,30 @@
+x1=imread('flower.bmp');
+figure(1);
+subplot(2,2,1)
+imshow(x1);
+title('原图');
+
+
+%添加噪声
+x2=imread('NoiseImg.bmp');
+x1=double(x1);
+subplot(2,2,2);
+imshow(x2);
+title('加噪后');
+x3=double(x2);
+
+WAVELET_NAME = 'hear';
+
+[Lo_D,Hi_D,Lo_R,Hi_R]=wfilters(WAVELET_NAME);
+RowLo_DTemp = RanksSampling(RanksConv(x3,Lo_D,'r'),'c',2);
+
+subplot(2,2,3)
+imshow(y2);
+title('软阈值去噪');
+
+
+subplot(2,2,4)
+imshow(y3);
+title('半软半硬阈值去噪');
+
+
